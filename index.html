@@ -41,6 +41,14 @@
     <!-- /Main Styles -->
     <!-- >> /CSS
 ============================================================================== -->
+    <script type="text/javascript">
+    var ismobile = false;
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        // some code..
+        ismobile = true;
+    }
+    alert(ismobile);
+    </script>
 </head>
 
 <body>
@@ -110,14 +118,23 @@
     </header>
 <!-- / Header
 ================================================== -->
-<div class="video-background">
-    <div class="video-foreground">
-      <iframe src="https://www.youtube.com/embed/GbxFXHvjfUc?controls=0&showinfo=0&rel=0&autoplay=1&loop=1" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
+<!-- Javascript insert the Youtube background
+================================================== -->
+<script type="text/javascript">
+if (ismobile == true)
+{
+    document.write('<div class="video-background">');
+    document.write('<div class="video-foreground">');
+    document.write('<iframe src="https://www.youtube.com/embed/GbxFXHvjfUc?controls=0&showinfo=0&rel=0&autoplay=0&loop=1" frameborder="0" allowfullscreen></iframe>');
+    document.write('</div>');
+    document.write('</div>');
 
-<div id="vidtop-content">
-<div class="vid-info">
+    document.write('<div id="vidtop-content">');
+    document.write('<div class="vid-info">');
+}
+
+</script>
+
 <!-- Main Content
 ================================================== -->
 <div id="content" class="site-content">
@@ -605,8 +622,13 @@
 </div>
 <!-- /Main Content    
 ================================================== -->
-  </div>
-</div>
+<script type="text/javascript">
+if (ismobile == true)
+{
+    document.write('</div>');
+    document.write('</div>');
+}
+</script>
 
 <!-- Footer
 ================================================== -->
