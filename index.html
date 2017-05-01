@@ -104,6 +104,12 @@
                                 <li><a title="Story" href="#story">Story</a></li>
                                 <li><a title="Story" href="#special-events">Ceremony</a></li>
                                 <li><a title="Story" href="#gallery">Gallery</a></li>
+                                <script type="text/javascript">
+                                if (ismobile == true)
+                                {
+                                    document.write('<li><a title="Story" href="video">Video</a></li>');
+                                }
+                                </script>
                             </ul>                           
                         </div>                      
                         <!-- /navigation -->
@@ -121,7 +127,7 @@
 <!-- Javascript insert the Youtube background
 ================================================== -->
 <script type="text/javascript">
-if (ismobile == true)
+if (ismobile == false)
 {
     document.write('<div class="video-background">');
     document.write('<div class="video-foreground">');
@@ -582,31 +588,31 @@ if (ismobile == true)
             <!-- Gallery Images -->
             <div class="gallery-images row">
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img8.jpg"><img src="img/gallery-img9.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img9.jpg"><img src="img/gallery-img9.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img8.jpg"><img src="img/gallery-img10.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img10.jpg"><img src="img/gallery-img10.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img2.jpg"><img src="img/gallery-img1.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img1.jpg"><img src="img/gallery-img1.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img5.jpg"><img src="img/gallery-img2.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img2.jpg"><img src="img/gallery-img2.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img8.jpg"><img src="img/gallery-img3.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img3.jpg"><img src="img/gallery-img3.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img7.jpg"><img src="img/gallery-img4.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img4.jpg"><img src="img/gallery-img4.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img1.jpg"><img src="img/gallery-img5.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img5.jpg"><img src="img/gallery-img5.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img7.jpg"><img src="img/gallery-img6.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img6.jpg"><img src="img/gallery-img6.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
-                <div class="bearr-gallery-item"><a href="img/gallery-img2.jpg"><img src="img/gallery-img7.jpg" alt="Gallery Image"></a></div>
+                <div class="bearr-gallery-item"><a href="img/gallery-img7.jpg"><img src="img/gallery-img7.jpg" alt="Gallery Image"></a></div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 no-space">
                 <div class="bearr-gallery-item"><a href="img/gallery-img8.jpg"><img src="img/gallery-img8.jpg" alt="Gallery Image"></a></div>
@@ -617,7 +623,23 @@ if (ismobile == true)
         </div>
         <!-- /Gallery -->
 
-
+        <!-- Gift List -->
+    <script type="text/javascript">
+    if (ismobile == true)
+    {
+        document.write('<div class="section section-gift-list" id="video">');
+            document.write('<div class="container">');
+                document.write('<div class="title-section-wrapper">');
+                    document.write('<h2 class="title-section">Video</h2>');
+                    document.write(' <p class="text-section">"If I know what love is, it is because of you." - Herman Hesse</p>');
+                document.write('</div>');
+                document.write('<div class="containera">');
+                    document.write('<iframe src="https://www.youtube.com/embed/GbxFXHvjfUc" frameborder="0" allowfullscreen class="video">');
+                document.write("</div>");
+            document.write("</div>");
+        document.write('</div>');
+    }
+    </script>
     </div>
 </div>
 <!-- /Main Content    
@@ -628,7 +650,7 @@ if (ismobile == true)
     document.write('</div>');
     document.write('</div>');
 }
-</script>
+</script>f
 
 <!-- Footer
 ================================================== -->
