@@ -86,9 +86,14 @@ function isEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   return regex.test(email);
 }
-if (firebase.auth().currentUser) {
-		window.location.href = "index.html";
-}
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    window.location.href = "index.html";
+  } else {
+    // No user is signed in.
+  }
+});
 $(document).ready(function(){
 	$("#frmlogin #username").on('input',function(e){
 		var username = $("#frmlogin #username").val();
