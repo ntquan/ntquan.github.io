@@ -125,7 +125,7 @@ $(document).ready(function(){
 		}
 		if (pass.length < 6)
 		{
-			Materialize.toast('Pass phải ít nhất 6 ký tự!', 2000);
+			Materialize.toast('Mật khẩu phải ít nhất 6 ký tự!', 2000);
 			return;
 		}
 		firebase.auth().signInWithEmailAndPassword(username, pass).then(function(){
