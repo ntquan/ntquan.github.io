@@ -12,6 +12,11 @@ $.validator.setDefaults({
 		var pass = $("#frmregister #password").val();
 		var repass = $("#frmregister #repassword").val();
 		var role = $("#frmregister #slc_role").val();
+		if (role == null || role == "")
+		{
+			Materialize.toast("Chọn 'Quyền hạn' của người dùng!", 2000);
+			return false;
+		}
 		var date = $("#frmregister #dateexpire").val();
 		var active = "false";
 		if ($('#frmregister #chk_active').prop('checked') == true)

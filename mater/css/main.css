@@ -2,6 +2,9 @@ header, main, footer {
     padding-left: 300px;
 }
 
+.row {
+    margin-bottom: 0px;
+}
 .input-field div.error {
     color: red;
     font-size: 0.8rem;
