@@ -40,6 +40,7 @@
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 	<script>
@@ -66,8 +67,7 @@
 	<script src="js/main.js"></script>
 </head>
 <body>
-<main>
-
+<header>
 <ul class="side-nav" id="slide-out" style="transform: translateX(0px);">
   <li>
       <img src="https://firebase.google.com/_static/images/firebase/touchicon-180.png">
@@ -104,7 +104,7 @@
 		<div class="collapsible-body">
 		  <ul>
 			<li><a href="#!">Quản Lý</a></li>
-			<li><a href="#!">Tạo Tài khoản</a></li>
+			<li><a href="#!" id="btn_createaccount">Tạo Tài khoản</a></li>
 		  </ul>
 		</div>
 	  </li>
@@ -113,7 +113,122 @@
   <li><div class="divider"></div></li>
   <li><a href="#!" id="btn-logout" class="waves-effect"><i class="material-icons right">arrow_forward</i>Đăng Xuất</a></li>
 </ul>
+</header>
+<main>
+<div class="container">
+	<div class="row">
+		<form id="frmregister" class="lighten-1 row">
+			<h4 class="indigo-text">Thêm tài khoản</h4>
+			<div class="col s12 ">
+			  <div class="row">
+				<div class="input-field col s6">
+				  <i class="material-icons prefix">person</i>
+				  <input id="username" name="username" type="text" data-error=".errorTxt1">
+				  <label for="username">Họ tên</label>
+				  <div class="errorTxt1"></div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="input-field col s6">
+				  <i class="material-icons prefix">email</i>
+				  <input id="email" name="email" type="email" data-error=".errorTxt2">
+				  <div class="errorTxt2"></div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="input-field col s6">
+				  <i class="material-icons prefix">lock</i>
+				  <input id="password" name="password" type="password" data-error=".errorTxt3">
+				  <label for="password">Mật khẩu</label>
+				  <div class="errorTxt3"></div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="input-field col s6">
+				  <i class="material-icons prefix">lock_outline</i>
+				  <input id="repassword" name="repassword" type="password" data-error=".errorTxt4">
+				  <label for="repassword">Nhập lại mật khẩu</label>
+				  <div class="errorTxt4"></div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="input-field col s6">
+				  <i class="material-icons prefix">security</i>
+				  <select id="slc_role" name="slc_role" data-error=".errorTxt5">
+					  <option value="" disabled="" selected="">Chọn phân quyền</option>
+					  <option value="admin">Quản trị</option>
+					  <option value="eng">Kỹ sư</option>
+				  </select>
+				  <label for="slc_role">Quyền hạn</label>
+				  <div class="input-field">
+					<div class="errorTxt5"></div>
+				  </div>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="input-field col s6">
+				  <i class="material-icons prefix">date_range</i>
+				  <input placeholder="dd/mm/yyyy" id="dateexpire" name="dateexpire" type="text" class="datepicker" data-error=".errorTxt6">
+				  <label for="dateexpire" class="">Ngày hết hạn</label>
+				  <div class="errorTxt6"></div>
+				</div>
+			  </div>
+			  <div class="row">
+				<p style="padding-left: 20px;">
+				  <input type="checkbox" id="chk_active" checked="checked"  data-error=".errorTxt7"/>
+				  <label for="chk_active">Kích hoạt</label>
+				  <div class="errorTxt7"></div>
+				</p>
+			  </div>
+			  <div class='row'>
+				<button type='submit' id="btn_register" name='btn_register' class='btn waves-effect waves-light indigo'> <i class="material-icons right">add</i>Tạo tài khoản</button>
+			  </div>
+			</div>
+		</form>
+	</div>
+</div>
+<!--
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <h4 class="modal-title" id="registerModalLabel">Register</h4>
+		</div>
+		<div class="modal-body">
+		  <div class="form-group">
+			<label for="recipient-name" class="control-label">First Name:</label>
+			<input type="text" class="form-control" id="registerFirstName">
+		  </div>
+		  <div class="form-group">
+			<label for="recipient-name" class="control-label">Last Name:</label>
+			<input type="text" class="form-control" id="registerLastName">
+		  </div>
+		  <div class="form-group">
+			<label for="recipient-name" class="control-label">Email:</label>
+			<input type="text" class="form-control" id="registerEmail">
+		  </div>
+		  <div class="form-group">
+			<label for="message-text" class="control-label">Password:</label>
+			<input type="password" class="form-control" id="registerPassword">
+		  </div>
+		  <div class="form-group">
+			<label for="message-text" class="control-label">Confirm Password:</label>
+			<input type="password" class="form-control" id="registerConfirmPassword">
+		  </div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" id="doRegister">Register</button>
+		</div>
+	  </div>
+	</div>
+</div>
+-->
+</div>
 </main>
+
+
 <!--
 http://demo.geekslabs.com/materialize-v1.0/form-elements.html
 -->

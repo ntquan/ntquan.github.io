@@ -40,35 +40,38 @@
 </head>
 <body>
 <center>
-<main>
-<div id="frmlogin" class="z-depth-1 grey lighten-4 row" style="display: inline-block; margin: 50px 0 0; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+<form id="frmlogin">
+<div class="z-depth-1 grey lighten-4 row" style="display: inline-block; margin: 50px 0 0; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
     <h5 class="indigo-text">Đăng Nhập</h5>
     <div class="col s12 ">
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">email</i>
-          <input id="username" type="email" class="validate">
-          <label for="username" data-error="Email không hợp lệ...!" >Email</label>
+          <input id="email" name="email" type="email" data-error=".errorTxt1">
+          <label for="email">Email</label>
+		  <div class="errorTxt1"></div>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">lock_outline</i>
-          <input id="password" type="password" class="validate">
+          <input id="password" name="password" type="password" data-error=".errorTxt2">
           <label for="password">Mật khẩu</label>
+		  <div class="errorTxt2"></div>
         </div>
       </div>
        <div class='row'>
-        <button type='button' id="btn_login" name='btn_login' class='col s12 btn btn-large waves-effect indigo disabled'>Đăng Nhập</button>
+        <button type='submit' id="btn_login" name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Đăng Nhập</button>
       </div>
     </div>
 </div>
-</main>
+</form>
 
 <center>
         
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
 <script>
@@ -94,9 +97,61 @@ firebase.auth().onAuthStateChanged(function(user) {
     // No user is signed in.
   }
 });
+
+$.validator.setDefaults({
+	submitHandler: function() {
+		//alert("submitted!");
+		var username = $("#frmlogin #email").val();
+		var pass = $("#frmlogin #password").val();
+		firebase.auth().signInWithEmailAndPassword(username, pass).then(function(){
+			//Success full
+			window.location.href = "index.html";
+			
+		}).catch(function(error) {
+			// Handle Errors here.
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			if (errorCode == 'auth/user-not-found') {
+				Materialize.toast("Không tìm thấy tài khoản này!", 2000);
+			}
+			else
+				Materialize.toast("Đăng nhập thất bại!", 2000);
+		});
+		return false;
+	}
+});
+
+	
 $(document).ready(function(){
-	$("#frmlogin #username").on('input',function(e){
-		var username = $("#frmlogin #username").val();
+	$("#frmlogin").validate({
+		rules: {
+			email: {
+				required: true,
+				email: true
+			},
+			password: {
+				required: true,
+				minlength: 6
+			}
+		},
+		//For custom messages
+		messages: {
+			email: "Email không hợp lệ",
+			password: "Mật khẩu phải ít nhất 6 ký tự!"
+		},
+		errorElement : 'div',
+		errorPlacement: function(error, element) {
+		  var placement = $(element).data('error');
+		  if (placement) {
+			$(placement).append(error)
+		  } else {
+			error.insertAfter(element);
+		  }
+		}
+	 });
+	/*
+	$("#frmlogin #email").on('input',function(e){
+		var username = $("#frmlogin #email").val();
 		var pass = $("#frmlogin #password").val();
 		if(isEmail(username) && pass != "")
 		{
@@ -106,7 +161,7 @@ $(document).ready(function(){
 			$("#frmlogin #btn_login").addClass("disabled");
 	});
 	$("#frmlogin #password").on('input',function(e){
-		var username = $("#frmlogin #username").val();
+		var username = $("#frmlogin #email").val();
 		var pass = $("#frmlogin #password").val();
 		if(isEmail(username) && pass != "")
 		{
@@ -116,7 +171,7 @@ $(document).ready(function(){
 			$("#frmlogin #btn_login").addClass("disabled");
 	});
 	$("#frmlogin #btn_login").click(function(){
-		var username = $("#frmlogin #username").val();
+		var username = $("#frmlogin #email").val();
 		var pass = $("#frmlogin #password").val();
 		if (!isEmail(username))
 		{
@@ -139,6 +194,7 @@ $(document).ready(function(){
 			Materialize.toast(error.message + "" + errorCode, 2000);
 		});
 	});
+	*/
 });
 </script>
 <!--

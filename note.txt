@@ -1,0 +1,15 @@
+database = firebase.database();
+messagesRef = database.ref('messages');
+messagesRef.push({
+      name: "abc",
+      text: "def"
+    }).then(function() {
+      // Clear message text field and SEND button state.
+      FriendlyChat.resetMaterialTextfield(this.messageInput);
+      this.toggleButton();
+    }.bind(this)).catch(function(error) {
+      console.error('Error writing new message to Firebase Database', error);
+});
+
+
+CTT603
