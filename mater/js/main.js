@@ -1,3 +1,15 @@
+// Initialize Firebase
+var config = {
+apiKey: "AIzaSyDMf01t2L2QUmMeIowNabetjkYKoAKCVgw",
+authDomain: "quan-test-eff9b.firebaseapp.com",
+databaseURL: "https://quan-test-eff9b.firebaseio.com",
+projectId: "quan-test-eff9b",
+storageBucket: "quan-test-eff9b.appspot.com",
+messagingSenderId: "681978952324"
+};
+firebase.initializeApp(config);
+
+
 function isEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   return regex.test(email);
@@ -35,6 +47,7 @@ $.validator.setDefaults({
 			  active: active
 			}).then(function() {
 			  // Clear message text field and SEND button state.
+              Materialize.toast("Tạo tài khoảng thành công", 2000);
 			  
 			}.bind(this)).catch(function(error) {
 			  console.error('Lưu dữ liệu thật bại', error);
@@ -47,6 +60,7 @@ $.validator.setDefaults({
 			//alert(errorMessage);
 			if (errorCode == 'auth/weak-password') {
 				Materialize.toast("Mật khẩu phải ít nhất 6 ký tự!", 2000);
+                location.reload(); 
 			}
 			else if (errorCode == "auth/email-already-in-use") {
 				Materialize.toast("Email đã tồn tại trên hệ thống!", 2000);

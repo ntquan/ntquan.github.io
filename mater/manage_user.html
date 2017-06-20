@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="xxxxxxxxxxxxxxx ">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>xxxxxxxxxxxxxxx</title>
+
+	<!-- Disable tap highlight on IE -->
+	<meta name="msapplication-tap-highlight" content="no">
+
+	<!-- Web Application Manifest -->
+	<link rel="manifest" href="manifest.json">
+
+	<!-- Add to homescreen for Chrome on Android -->
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="xxxxxxxxxxxxxxx">
+	<meta name="theme-color" content="#303F9F">
+
+	<!-- Add to homescreen for Safari on iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="xxxxxxxxxxxxxxx">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
+
+	<!-- Tile icon for Win8 -->
+	<meta name="msapplication-TileColor" content="#3372DF">
+	<meta name="msapplication-navbutton-color" content="#303F9F">
+
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+	<!-- App Styling -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+	<link rel="stylesheet" href="css/main.css">
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+
+	<script src="js/main.js"></script>
+</head>
+<body>
+<div class="">
+	<div class="row">
+		<form id="frmregister" class="lighten-1 row">
+			<div class="col s12 ">
+			  <h4 class="indigo-text">Quản lý tài khoản người dùng</h4>
+			  <div class="row">
+				<div class="input-field col s6">
+				  <i class="material-icons prefix">person</i>
+				  <input id="username" name="username" type="text" data-error=".errorTxt1">
+				  <label for="username">Họ tên</label>
+				  <div class="errorTxt1"></div>
+				</div>
+			  </div>
+			  <div class='row'>
+				<button type='submit' id="btn_register" name='btn_register' class='btn waves-effect waves-light indigo'> <i class="material-icons right">add</i>Some thing</button>
+			  </div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<!--
+http://demo.geekslabs.com/materialize-v1.0/form-elements.html
+-->
+
+</body>
+</html>
