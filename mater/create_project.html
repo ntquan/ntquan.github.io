@@ -60,12 +60,11 @@
 <div id="test1" class="">
 	<div class="row">
 		<form id="frmcreateproject" class="lighten-1 row">
-			
 			<div class="col s12 ">
 			<h4 class="indigo-text">Thêm dự án</h4>
 			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">person</i>
+				  <i class="material-icons prefix">assignment</i>
 				  <input id="name_name" name="name_name" type="text" data-error=".errorTxt1">
 				  <label for="name_name">Tên Dự án</label>
 				  <div class="errorTxt1"></div>
@@ -81,7 +80,7 @@
 			  </div>
 			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">person</i>
+				  <i class="material-icons prefix">add_location</i>
 				  <input id="name_addr" name="name_addr" type="text" data-error=".errorTxt3">
 				  <label for="name_addr">Địa điểm công trình</label>
 				  <div class="errorTxt3"></div>
@@ -90,18 +89,18 @@
 			  <div class="row">
                 <div class="file-field input-field col s6">
                   <div class="btn indigo">
-                    <span>Logo chủ đầu tư</span>
-                    <input type="file">
+                    <span><i class="material-icons left">add_a_photo</i> Logo chủ đầu tư</span>
+                    <input id="name_hostlogo" type="file">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" id="name_hostLogo" type="text"  data-error=".errorTxt4">
+                    <input class="file-path validate" id="name_hostlogo_filename" type="text"  data-error=".errorTxt4">
                     <div class="errorTxt4"></div>
                   </div>
                 </div>
 			  </div>
 			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">person</i>
+				  <i class="material-icons prefix">timer</i>
 				  <input id="name_reportime" name="name_reportime" type="text" data-error=".errorTxt5">
 				  <label for="name_reportime">Thời gian gửi báo cáo</label>
 				  <div class="errorTxt5"></div>
@@ -109,15 +108,16 @@
 			  </div>
 			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">person</i>
-				  <input id="name_reportime" name="name_reportime" type="text" data-error=".errorTxt6">
+				  <i class="material-icons prefix">email</i>
+				  <input id="name_emails" name="name_emails" type="text" data-error=".errorTxt6">
 				  <label for="name_reportime">Danh sách Email nhận báo cáo (...,...,...)</label>
 				  <div class="errorTxt6"></div>
 				</div>
 			  </div>
 			  <div class="row">
 			  	<div class="input-field col s6">
-					<button type="button" id="btn_create_project" name='btn_register' class='btn waves-effect waves-light indigo'> <i class="material-icons right">go</i>Tiếp</button>
+					<button type='reset' id="btn_reset" name='btn_reset' class='btn waves-effect waves-light indigo'> <i class="material-icons right">delete</i>Xóa form</button>
+					<button type="button" id="btn_create_project" name='btn_register' class='btn waves-effect waves-light indigo'> <i class="material-icons right">forward</i>Tiếp theo</button>
 					<br/>
 					<br/>
 					<div class="preloader-wrapper big active">

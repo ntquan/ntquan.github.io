@@ -13,69 +13,10 @@ firebase.initializeApp(config);
 function isEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   return regex.test(email);
+
 }
 
 var auth, database, storage;
-$.validator.setDefaults({
-	submitHandler: function() {
-		//alert("submitted!");
-		var username = $("#frmregister #username").val();
-		var email = $("#frmregister #email").val();
-		var pass = $("#frmregister #password").val();
-		var repass = $("#frmregister #repassword").val();
-		var role = $("#frmregister #slc_role").val();
-		if (role == null || role == "")
-		{
-			Materialize.toast("Chọn 'Quyền hạn' của người dùng!", 2000);
-			return false;
-		}
-		var dateString = $("#frmregister #dateexpire").val().split("/");
-        var dateyDate = new Date(dateString[2], dateString[1] - 1, dateString[0]);
-        var ms = dateyDate.valueOf();
-        var date = ms / 1000;
-		var active = "false";
-		if ($('#frmregister #chk_active').prop('checked') == true)
-			active = "true";
-		auth.createUserWithEmailAndPassword(email, pass).then(function(){
-			var user = firebase.auth().currentUser;
-			// Reference to the /messages/ database path.
-			
-			database.ref('user/' + user.uid).set({
-			  name: username,
-			  email: email,
-			  pass: pass,
-			  role: role,
-			  uid: user.uid,
-			  exp: date,
-			  active: active
-			}).then(function() {
-			  // Clear message text field and SEND button state.
-              Materialize.toast("Tạo tài khoảng thành công", 2000);
-			  
-			}.bind(this)).catch(function(error) {
-			  console.error('Lưu dữ liệu thật bại', error);
-			});
-			
-		}).catch(function(error) {
-			// Handle Errors here.
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			//alert(errorMessage);
-			if (errorCode == 'auth/weak-password') {
-				Materialize.toast("Mật khẩu phải ít nhất 6 ký tự!", 2000);
-                location.reload(); 
-			}
-			else if (errorCode == "auth/email-already-in-use") {
-				Materialize.toast("Email đã tồn tại trên hệ thống!", 2000);
-			}
-			else
-			{
-				Materialize.toast("Tạo tài khoản không thành công!", 2000);
-			}
-		});
-		return false;
-	}
-});
 
 
 $(document).ready(function(){
@@ -135,44 +76,112 @@ $(document).ready(function(){
 	});
 
 
-	// Initiates Firebase auth and listen to auth state changes.
-	//auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
-	
-	/*
-	$("#sign-up").click(function(){
-		var email = $("#username").val();
-		var password = $("#userpass").val();
-		auth.createUserWithEmailAndPassword(email, password).then(function(){
+	$("#frmregister #btn_register").click(function() {
+		//alert("submitted!");
+		if (!$("#frmregister").valid())
+			return;
+		var username = $("#frmregister #username").val();
+		var email = $("#frmregister #email").val();
+		var pass = $("#frmregister #password").val();
+		var repass = $("#frmregister #repassword").val();
+		var role = $("#frmregister #slc_role").val();
+		if (role == null || role == "")
+		{
+			Materialize.toast("Chọn 'Quyền hạn' của người dùng!", 2000, "red");
+			return false;
+		}
+		var dateString = $("#frmregister #dateexpire").val().split("/");
+		var dateyDate = new Date(dateString[2], dateString[1] - 1, dateString[0]);
+		var ms = dateyDate.valueOf();
+		var date = ms / 1000;
+		var active = "false";
+		if ($('#frmregister #chk_active').prop('checked') == true)
+			active = "true";
+		auth.createUserWithEmailAndPassword(email, pass).then(function(){
+			var user = firebase.auth().currentUser;
+			// Reference to the /messages/ database path.
+			
+			database.ref('user/' + user.uid).set({
+			  name: username,
+			  email: email,
+			  pass: pass,
+			  role: role,
+			  uid: user.uid,
+			  exp: date,
+			  active: active
+			}).then(function() {
+			  // Clear message text field and SEND button state.
+			  Materialize.toast("Tạo tài khoản thành công", 2000);
+			  
+			}.bind(this)).catch(function(error) {
+			  console.error('Lưu dữ liệu thất bại', error);
+			});
 			
 		}).catch(function(error) {
 			// Handle Errors here.
 			var errorCode = error.code;
 			var errorMessage = error.message;
 			//alert(errorMessage);
-			var data = {
-			  message: errorMessage,
-			  timeout: 2000
-			};
-			var snackbarContainer = document.getElementById("must-signin-snackbar");
-			snackbarContainer.MaterialSnackbar.showSnackbar(data);
-			//$("#must-signin-snackbar").MaterialSnackbar.showSnackbar(data);
+			if (errorCode == 'auth/weak-password') {
+				Materialize.toast("Mật khẩu phải ít nhất 6 ký tự!", 2000, "red");
+				location.reload(); 
+			}
+			else if (errorCode == "auth/email-already-in-use") {
+				Materialize.toast("Email đã tồn tại trên hệ thống!", 2000, "red");
+			}
+			else
+			{
+				Materialize.toast("Tạo tài khoản không thành công!", 2000, "red");
+			}
 		});
-		firebase.auth().signOut().then(function(data) {
-		  // Sign-out successful.
-		}).catch(function(data) {
-		  // An error happened.
-		});
+		return false;
 	});
-	*/
 	
-	$("#btn-logout").click(function() {
-		firebase.auth().signOut().then(function() {
-		  // Sign-out successful.
-		  Materialize.toast('Đăng xuất thành công!', 2000);
-		  window.location.href = "login.html";
-		}).catch(function(error) {
-		  // An error happened.
-		  Materialize.toast('Đăng xuất thất bại!', 2000);
+	
+	$("#frmcreateproject #btn_create_project").click(function() {
+		if (!$("#frmcreateproject").valid())
+			return;
+		// File or Blob named mountains.jpg
+		var file = $("#frmcreateproject #name_hostlogo")[0].files[0];
+
+		if (!file.type.match('image.*')) {
+			Materialize.toast("File upload không phải là hình ảnh!", 2000, "red");
+			return;
+		}
+		var name = $("#frmcreateproject #name_name").val();
+		var host = $("#frmcreateproject #name_host").val();
+		var addr = $("#frmcreateproject #name_addr").val();
+		var rpTime = $("#frmcreateproject #name_reportime").val();
+		var emails = $("#frmcreateproject #name_emails").val();
+		var hLogo = "";
+		var id = "";
+
+
+		var duanRef = database.ref('duan');
+		duanRef.push({
+			name: name,
+			host: host,
+			addr: addr,
+			rpTime: rpTime,
+			hLogo: hLogo,
+			id: id
+	    }).then(function(data) {
+
+		      // Upload the image to Cloud Storage.
+		      var filePath = "images" + '/' +  Math.round(Math.random()*1234567890, 0.5) + "_" + file.name;
+		      return storage.ref(filePath).put(file).then(function(snapshot) {
+
+		        // Get the file's Storage URI and update the chat message placeholder.
+		        var fullPath = snapshot.metadata.fullPath;
+		        return data.update({hLogo: storage.ref(fullPath).toString()});
+		      }.bind(this));
+
+	    }.bind(this)).catch(function(error) {
+		      console.error('There was an error uploading a file to Cloud Storage:', error);
+		      Materialize.toast("There was an error uploading a file to Cloud Storage!" + error, 2000, "red");
 		});
+
+
 	});
+
 });

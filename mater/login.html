@@ -123,10 +123,10 @@ $.validator.setDefaults({
 			var errorCode = error.code;
 			var errorMessage = error.message;
 			if (errorCode == 'auth/user-not-found') {
-				Materialize.toast("Không tìm thấy tài khoản này!", 2000);
+				Materialize.toast("Không tìm thấy tài khoản này!", 2000, "red");
 			}
 			else
-				Materialize.toast("Đăng nhập thất bại!", 2000);
+				Materialize.toast("Đăng nhập thất bại!", 2000, "red");
 		});
 		return false;
 	}
