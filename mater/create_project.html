@@ -47,76 +47,77 @@
 	<script src="js/main.js"></script>
 </head>
 <body>
-<div class="">
+    
+<div class="row">
+<div class="col s12">
+  <ul class="tabs">
+    <li class="tab col s3 indigo-text"><a class="active" href="#test1">Thêm dự án</a></li>
+    <li class="tab col s3 indigo-text"><a  href="#test2">Thêm hạn mục</a></li>
+  </ul>
+</div>
+
+  
+<div id="test1" class="">
 	<div class="row">
-		<form id="frmregister" class="lighten-1 row">
+		<form id="frmcreateproject" class="lighten-1 row">
 			
 			<div class="col s12 ">
-			<h4 class="indigo-text">Thêm tài khoản</h4>
+			<h4 class="indigo-text">Thêm dự án</h4>
 			  <div class="row">
 				<div class="input-field col s6">
 				  <i class="material-icons prefix">person</i>
-				  <input id="username" name="username" type="text" data-error=".errorTxt1">
-				  <label for="username">Họ tên</label>
+				  <input id="name_name" name="name_name" type="text" data-error=".errorTxt1">
+				  <label for="name_name">Tên Dự án</label>
 				  <div class="errorTxt1"></div>
 				</div>
 			  </div>
 			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">email</i>
-				  <input id="email" name="email" type="email" data-error=".errorTxt2">
-				  <label for="email">Email</label>
+				  <i class="material-icons prefix">person</i>
+				  <input id="name_host" name="name_host" type="text" data-error=".errorTxt2">
+				  <label for="name_host">Chủ đầu tư</label>
 				  <div class="errorTxt2"></div>
 				</div>
 			  </div>
 			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">lock</i>
-				  <input id="password" name="password" type="password" data-error=".errorTxt3">
-				  <label for="password">Mật khẩu</label>
+				  <i class="material-icons prefix">person</i>
+				  <input id="name_addr" name="name_addr" type="text" data-error=".errorTxt3">
+				  <label for="name_addr">Địa điểm công trình</label>
 				  <div class="errorTxt3"></div>
 				</div>
 			  </div>
 			  <div class="row">
+                <div class="file-field input-field col s6">
+                  <div class="btn indigo">
+                    <span>Logo chủ đầu tư</span>
+                    <input type="file">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" id="name_hostLogo" type="text"  data-error=".errorTxt4">
+                    <div class="errorTxt4"></div>
+                  </div>
+                </div>
+			  </div>
+			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">lock_outline</i>
-				  <input id="repassword" name="repassword" type="password" data-error=".errorTxt4">
-				  <label for="repassword">Nhập lại mật khẩu</label>
-				  <div class="errorTxt4"></div>
+				  <i class="material-icons prefix">person</i>
+				  <input id="name_reportime" name="name_reportime" type="text" data-error=".errorTxt5">
+				  <label for="name_reportime">Thời gian gửi báo cáo</label>
+				  <div class="errorTxt5"></div>
 				</div>
 			  </div>
 			  <div class="row">
 				<div class="input-field col s6">
-				  <i class="material-icons prefix">security</i>
-				  <select id="slc_role" name="slc_role" data-error=".errorTxt5">
-					  <option value="" disabled="" selected="">Chọn phân quyền</option>
-					  <option value="admin">Quản trị</option>
-					  <option value="eng">Kỹ sư</option>
-				  </select>
-				  <label for="slc_role">Quyền hạn</label>
-				  <div class="input-field">
-					<div class="errorTxt5"></div>
-				  </div>
-				</div>
-			  </div>
-			  <div class="row">
-				<div class="input-field col s6">
-				  <i class="material-icons prefix">date_range</i>
-				  <input placeholder="dd/mm/yyyy" id="dateexpire" name="dateexpire" type="text" class="datepicker" data-error=".errorTxt6">
-				  <label for="dateexpire" class="">Ngày hết hạn</label>
+				  <i class="material-icons prefix">person</i>
+				  <input id="name_reportime" name="name_reportime" type="text" data-error=".errorTxt6">
+				  <label for="name_reportime">Danh sách Email nhận báo cáo (...,...,...)</label>
 				  <div class="errorTxt6"></div>
 				</div>
 			  </div>
 			  <div class="row">
-				<p style="padding-left: 20px;">
-				  <input type="checkbox" id="chk_active" checked="checked"  data-error=".errorTxt7"/>
-				  <label for="chk_active">Kích hoạt</label>
-				  <div class="errorTxt7"></div>
-				</p>
-			  </div>
-			  <div class='row'>
 			  	<div class="input-field col s6">
-					<button type='button' id="btn_register" name='btn_register' class='btn waves-effect waves-light indigo'> <i class="material-icons right">add</i>Tạo tài khoản</button>
+					<button type="button" id="btn_create_project" name='btn_register' class='btn waves-effect waves-light indigo'> <i class="material-icons right">go</i>Tiếp</button>
 					<br/>
 					<br/>
 					<div class="preloader-wrapper big active">
@@ -139,6 +140,9 @@
 	</div>
 </div>
 
+
+<div id="test2" class="col s12">Test 2</div>
+</div>
 
 <!--
 http://demo.geekslabs.com/materialize-v1.0/form-elements.html

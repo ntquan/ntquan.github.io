@@ -29,7 +29,10 @@ $.validator.setDefaults({
 			Materialize.toast("Chọn 'Quyền hạn' của người dùng!", 2000);
 			return false;
 		}
-		var date = $("#frmregister #dateexpire").val();
+		var dateString = $("#frmregister #dateexpire").val().split("/");
+        var dateyDate = new Date(dateString[2], dateString[1] - 1, dateString[0]);
+        var ms = dateyDate.valueOf();
+        var date = ms / 1000;
 		var active = "false";
 		if ($('#frmregister #chk_active').prop('checked') == true)
 			active = "true";
