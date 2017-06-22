@@ -10,17 +10,82 @@ messagingSenderId: "681978952324"
 firebase.initializeApp(config);
 
 
+
+
+
+var debug_value;
+
+
+
+
+
+
 function isEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   return regex.test(email);
 
 }
 
+function save_DB_HanMuc(key_duan, name_hanmuc, name_bophan, email_user)
+{
+	var hangmucRef = database.ref('hangmuc');
+	
+	var hangmuc_key = "";
+	hangmucRef.push({
+		keyDuAn: key_duan,
+		name: name_hanmuc,
+		bophan: name_bophan,
+		emailuser: email_user,
+    }).then(function(data) {
+		  hangmuc_key = data.key;
+    }.bind(this)).catch(function(error) {
+	      hangmuc_key = "";
+	});
+	return hangmuc_key;
+}
+
+function save_HanMuc(obj) {
+
+	//alert($(obj).html());
+	debug_value = obj;
+	var name_hanmuc = $(obj).parent().parent().find("input[name=name_hanmuc]:first").val();
+	var name_bophan = $(obj).parent().parent().find("select[name=select_bophan]:first").val();
+	var email_user = $(obj).parent().parent().find("select[name=select_kysu]:first").val();
+
+	var key_duan = $("#frmcreatehanmuc #name_duan_key").val();
+	var result = save_DB_HanMuc(key_duan, name_hanmuc, name_bophan, email_user);
+	if(result == -1)
+	{
+		 Materialize.toast("Loi roi ne 111 >>>>>>!", 2000, "red");
+		 return;
+	}
+	//alert(result);
+}
+function edit_HanMuc(obj) {
+	alert($(obj).html());
+}
+function delete_HanMuc(obj) {
+	alert($(obj).html());
+}
+var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
 var auth, database, storage;
 
+function setImageUrl (imageUri, imgElement) {
+  // If the image is a Cloud Storage URI we fetch the URL.
+	if (imageUri.startsWith('gs://')) {
+		imgElement.src = FriendlyChat.LOADING_IMAGE_URL; // Display a loading image first.
+		storage.refFromURL(imageUri).getMetadata().then(function(metadata) {
+			imgElement.src = metadata.downloadURLs[0];
+		});
+	} else {
+		imgElement.src = imageUri;
+	}
+};
+
+var __temp = "";
 
 $(document).ready(function(){
-	$('select').material_select();
+	$('select#slc_role').material_select();
 	$('.datepicker').pickadate({
 		format: 'dd/mm/yyyy',
 		selectMonths: true, // Creates a dropdown to control month
@@ -137,14 +202,18 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	
+	var key_duan = "";
 	$("#frmcreateproject #btn_create_project").click(function() {
 		if (!$("#frmcreateproject").valid())
 			return;
 		// File or Blob named mountains.jpg
 		var file = $("#frmcreateproject #name_hostlogo")[0].files[0];
-
-		if (!file.type.match('image.*')) {
+		if (file == null)
+		{
+			Materialize.toast("File upload không phải là hình ảnh!", 2000, "red");
+			return;
+		}
+		else if (!file.type.match('image.*')) {
 			Materialize.toast("File upload không phải là hình ảnh!", 2000, "red");
 			return;
 		}
@@ -154,19 +223,19 @@ $(document).ready(function(){
 		var rpTime = $("#frmcreateproject #name_reportime").val();
 		var emails = $("#frmcreateproject #name_emails").val();
 		var hLogo = "";
-		var id = "";
 
 
 		var duanRef = database.ref('duan');
+		
 		duanRef.push({
 			name: name,
 			host: host,
 			addr: addr,
 			rpTime: rpTime,
 			hLogo: hLogo,
-			id: id
 	    }).then(function(data) {
-
+			  __temp = data;
+			  key_duan = data.key;
 		      // Upload the image to Cloud Storage.
 		      var filePath = "images" + '/' +  Math.round(Math.random()*1234567890, 0.5) + "_" + file.name;
 		      return storage.ref(filePath).put(file).then(function(snapshot) {
@@ -178,8 +247,56 @@ $(document).ready(function(){
 
 	    }.bind(this)).catch(function(error) {
 		      console.error('There was an error uploading a file to Cloud Storage:', error);
-		      Materialize.toast("There was an error uploading a file to Cloud Storage!" + error, 2000, "red");
+		      Materialize.toast("There was an error uploading a file to Cloud Storage!", 2000, "red");
+		      return;
 		});
+
+		if (key_duan == "")
+			return;
+
+		//Write key_duan into hidden field
+		$("#frmcreatehanmuc #name_duan_key").val(key_duan);
+	    //Prepare next tab
+	    $("#frmcreatehanmuc #h4_hangmuc_ducan").html("Them han muc cho du an " + '"' + name + '"');
+		//Next tab
+		$('#tab_createproject.tabs').children().eq(1).removeClass("disabled");
+		$('#tab_createproject.tabs').tabs('select_tab', 'frmcreatehanmuc');
+
+		//Remove button on tab 1
+		$("#frmcreateproject #btn_reset").fadeOut();
+		$("#frmcreateproject #btn_create_project").fadeOut();
+
+		//Get list user, insert into List
+		var ref = firebase.database().ref("user");
+
+		var ref_select_kysu = $("#frmcreatehanmuc select[name=select_kysu]");
+		var query = ref.orderByChild("name");
+		query.on('child_added', function (snapshot) {
+			if(snapshot.val().role == "eng")
+			{
+				$("<option />", {value: snapshot.val().email, text: snapshot.val().name}).appendTo(ref_select_kysu);
+				//ref_select_kysu.material_select();
+			}
+		});
+	});
+
+	$("#frmcreatehanmuc #bt_add_hanmuc").click(function() {
+		key_duan = "test 0111111";
+		if(key_duan == "")
+		{
+			Materialize.toast("Ko tim thay key_duan!", 2000, "red");
+			setTimeout(location.reload.bind(location), 2000);
+			return;
+		}
+
+		var row_hangmuc = $(this).parent().find("div:first");
+		var clone_row_hangmuc = $("#frmcreatehanmuc #hanmuc_template").clone();
+		clone_row_hangmuc.removeClass("hide").prop('id', "" );
+		//clone_row_hangmuc.find("select:first").prop("name", "select_bophan_" + $.now())
+		//clone_row_hangmuc.find("select:last").prop("name", "select_kysu_" + $.now())
+		//clone_row_hangmuc.find("select").material_select();
+
+		clone_row_hangmuc.appendTo(row_hangmuc).find("select").material_select();
 
 
 	});

@@ -50,9 +50,9 @@
     
 <div class="row">
 <div class="col s12">
-  <ul class="tabs">
-    <li class="tab col s3 indigo-text"><a class="active" href="#test1">Thêm dự án</a></li>
-    <li class="tab col s3 indigo-text"><a  href="#test2">Thêm hạn mục</a></li>
+  <ul id="tab_createproject" class="tabs">
+    <li class="tab col s3 indigo-text bold"><a class="active" href="#test1">Thêm dự án</a></li>
+    <li class="tab col s3 indigo-text"><a href="#frmcreatehanmuc">Thêm hạn mục</a></li>
   </ul>
 </div>
 
@@ -60,7 +60,7 @@
 <div id="test1" class="">
 	<div class="row">
 		<form id="frmcreateproject" class="lighten-1 row">
-			<div class="col s12 ">
+		<div class="col s12 ">
 			<h4 class="indigo-text">Thêm dự án</h4>
 			  <div class="row">
 				<div class="input-field col s6">
@@ -131,7 +131,6 @@
 					      </div>
 					    </div>
 				  	</div>
-
 				</div>
 			  </div>
 			</div>
@@ -141,7 +140,43 @@
 </div>
 
 
-<div id="test2" class="col s12">Test 2</div>
+<div id="frmcreatehanmuc" class="col s12">
+	<div class="col s12 ">
+		<h4 class="indigo-text" id="h4_hangmuc_ducan"></h4>
+		<input id="name_duan_key" name="name_duan_key" type="hidden" value="">
+		<div id="hanmuc_template" class="row hide">
+			<div class="input-field col s4">
+			  <i class="material-icons prefix">assignment</i>
+			  <input name="name_hanmuc" placeholder="Tên Han muc" type="text">
+			  <input name="name_hanmuc_key" type="hidden" value="">
+			  <label>Tên Han muc</label>
+			</div>
+			<div class="input-field col s3">
+				<select name="select_bophan">
+					  <option value="" disabled="" selected="">Chọn bộ phận</option>
+					  <option value="item1">Item1</option>
+					  <option value="item2">Item2</option>
+					  <option value="item3">Item3</option>
+					  <option value="item4">Item4</option>
+				</select>
+			</div>
+			<div class="input-field col s3">
+				<select name="select_kysu">
+					<option value="" disabled="" selected="">Chọn kỹ sư chịu trách nhiệm</option>
+				</select>
+			</div>
+			<div class="col s2">
+				<a class="btn-floating btn-large waves-effect waves-light red" onclick="save_HanMuc(this)"><i class="material-icons">save</i></a>
+				<a class="btn-floating btn-large waves-effect waves-light red hide" onclick="edit_HanMuc(this)"><i class="material-icons">edit</i></a>
+				<a class="btn-floating btn-large waves-effect waves-light red hide" onclick="delete_HanMuc(this)"><i class="material-icons">delete</i></a>
+			</div>
+		</div>
+	</div>
+	<a id="bt_add_hanmuc" class="btn-floating btn-large waves-effect waves-light red" style="margin-left: 100px;">
+		<i class="material-icons">add</i>
+	</a>
+</div>
+
 </div>
 
 <!--
