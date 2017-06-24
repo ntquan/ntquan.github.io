@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 
 
 var debug_value;
-
+var __temp = "";
 
 
 
@@ -28,6 +28,7 @@ function isEmail(email) {
 
 function save_DB_HanMuc(key_duan, name_hanmuc, name_bophan, email_user)
 {
+	//alert("vao ham nay");
 	var hangmucRef = database.ref('hangmuc');
 	
 	var hangmuc_key = "";
@@ -38,10 +39,15 @@ function save_DB_HanMuc(key_duan, name_hanmuc, name_bophan, email_user)
 		emailuser: email_user,
     }).then(function(data) {
 		  hangmuc_key = data.key;
+		  $("#frmcreatehanmuc input[name=name_hanmuc_key]:first").val(hangmuc_key);
+		  console.log("key hang muc: " + hangmuc_key);
+		  return hangmuc_key;
     }.bind(this)).catch(function(error) {
 	      hangmuc_key = "";
+	      return hangmuc_key;
 	});
-	return hangmuc_key;
+	//while(hangmuc_key == "");
+	//alert(hangmuc_key);
 }
 
 function save_HanMuc(obj) {
@@ -54,11 +60,8 @@ function save_HanMuc(obj) {
 
 	var key_duan = $("#frmcreatehanmuc #name_duan_key").val();
 	var result = save_DB_HanMuc(key_duan, name_hanmuc, name_bophan, email_user);
-	if(result == -1)
-	{
-		 Materialize.toast("Loi roi ne 111 >>>>>>!", 2000, "red");
-		 return;
-	}
+	$(obj).parent().find("a").removeClass("hide");
+	$(obj).fadeOut();
 	//alert(result);
 }
 function edit_HanMuc(obj) {
@@ -81,8 +84,6 @@ function setImageUrl (imageUri, imgElement) {
 		imgElement.src = imageUri;
 	}
 };
-
-var __temp = "";
 
 $(document).ready(function(){
 	$('select#slc_role').material_select();
@@ -234,7 +235,6 @@ $(document).ready(function(){
 			rpTime: rpTime,
 			hLogo: hLogo,
 	    }).then(function(data) {
-			  __temp = data;
 			  key_duan = data.key;
 		      // Upload the image to Cloud Storage.
 		      var filePath = "images" + '/' +  Math.round(Math.random()*1234567890, 0.5) + "_" + file.name;
